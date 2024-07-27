@@ -66,6 +66,8 @@ def login_user(email, password):
             st.session_state['logged_in'] = True
             st.session_state['user_id'] = user_id
             st.session_state['email'] = email
+            switch_page("Dashboard")
+            
         else:
             st.error(f"Error: {response.json()['error']['message']}")
     except Exception as e:
@@ -82,7 +84,7 @@ if 'logged_in' not in st.session_state:
 
 if st.session_state['logged_in']:
     st.sidebar.success("Login successful!")
-    switch_page("Dashboard")
+    
 else:
     hide_sidebar()
     selection = st.selectbox("Choose an action", ["Login", "Register"], label_visibility="hidden")
