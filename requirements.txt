@@ -6,4 +6,4 @@ plotly
 streamlit_extras
 streamlit_shadcn_ui
 numpy
-sklearn
+skicit-learn
