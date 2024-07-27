@@ -6,4 +6,6 @@ plotly
 streamlit_extras
 streamlit_shadcn_ui
 numpy
-skicit-learn
+tensorflow
+opencv-python
+scikit-learn
