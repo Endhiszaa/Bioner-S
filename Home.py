@@ -80,10 +80,7 @@ def is_valid_email(email):
 # ui login/register
 if 'logged_in' not in st.session_state:
     st.session_state['logged_in'] = False
-
-if st.session_state['logged_in']:
-    st.sidebar.success("Login successful!")
-    switch_page("Dashboard")
+    
 else:
     hide_sidebar()
     selection = st.selectbox("Choose an action", ["Login", "Register"], label_visibility="hidden")
