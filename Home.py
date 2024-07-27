@@ -8,8 +8,11 @@ import re
 
 # Initialize Firebase
 if not firebase_admin._apps:
-    cred = credentials.Certificate('bioner-s-firebase-adminsdk-mz6mu-bf7339b2ed.json')
-    #firebase_admin.initialize_app(cred)
+    try:
+        cred = credentials.Certificate('bioner-s-firebase-adminsdk-mz6mu-bf7339b2ed.json')
+        firebase_admin.initialize_app(cred)
+    except Exception as e:
+        st.error(f"Failed to initialize Firebase app: {e}")
 
 # Function to hide the sidebar
 def hide_sidebar():
