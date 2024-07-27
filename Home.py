@@ -6,12 +6,12 @@ from firebase_admin import credentials, auth
 import requests
 import re
 
-# menggunakan firebase
+# Initialize Firebase
 if not firebase_admin._apps:
     cred = credentials.Certificate('bioner-s-firebase-adminsdk-mz6mu-bf7339b2ed.json')
     firebase_admin.initialize_app(cred)
 
-# menyembunyikan sidebar
+# Function to hide the sidebar
 def hide_sidebar():
     st.markdown("""
         <style>
@@ -34,7 +34,7 @@ with st.container():
     with cent_co:
         st.image('NO BG.png', width=300)
 
-# fungsi untuk login atau register
+# Authentication functions
 def register_user(email, password):
     try:
         user = auth.create_user(
@@ -72,15 +72,18 @@ def login_user(email, password):
     except Exception as e:
         st.error(f"Error logging in: {e}")
 
-# mengvalidasi email
+# Email validation function
 def is_valid_email(email):
     pattern = r'^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$'
     return re.match(pattern, email) is not None
 
-# ui login/register
+# User Interface
 if 'logged_in' not in st.session_state:
     st.session_state['logged_in'] = False
-    
+
+if st.session_state['logged_in']:
+    st.sidebar.success("Login successful!")
+    switch_page("Dashboard")
 else:
     hide_sidebar()
     selection = st.selectbox("Choose an action", ["Login", "Register"], label_visibility="hidden")
