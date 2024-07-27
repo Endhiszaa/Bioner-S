@@ -66,7 +66,6 @@ def login_user(email, password):
             st.session_state['logged_in'] = True
             st.session_state['user_id'] = user_id
             st.session_state['email'] = email
-            switch_page("Dashboard")
         else:
             st.error(f"Error: {response.json()['error']['message']}")
     except Exception as e:
