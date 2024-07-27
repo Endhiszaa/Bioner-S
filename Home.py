@@ -9,7 +9,7 @@ import re
 # Initialize Firebase
 if not firebase_admin._apps:
     cred = credentials.Certificate('bioner-s-firebase-adminsdk-mz6mu-bf7339b2ed.json')
-    #firebase_admin.initialize_app(cred)
+    firebase_admin.initialize_app(cred)
 
 # Function to hide the sidebar
 def hide_sidebar():
