@@ -25,7 +25,6 @@ if st.sidebar.button("Logout"):
 # Initialize Firebase Admin SDK
 @st.cache_resource
 def init_firebase():
-    if not firebase_admin._apps:
         cred = credentials.Certificate('bioner-s-firebase-adminsdk-mz6mu-bf7339b2ed.json')
         firebase_admin = firebase_admin.initialize_app(cred, {'databaseURL': 'https://bioner-s-default-rtdb.asia-southeast1.firebasedatabase.app/'})
 
