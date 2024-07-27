@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 import smtplib
 from email.mime.text import MIMEText
 import os
+import time
 
 st.set_page_config(
     page_title="Dashboard",
@@ -25,8 +26,11 @@ if st.sidebar.button("Logout"):
 # Initialize Firebase Admin SDK
 @st.cache_resource
 def init_firebase():
+    if not firebase_admin._apps:
         cred = credentials.Certificate('bioner-s-firebase-adminsdk-mz6mu-bf7339b2ed.json')
-        firebase_admin = firebase_admin.initialize_app(cred, {'databaseURL': 'https://bioner-s-default-rtdb.asia-southeast1.firebasedatabase.app/'})
+        firebase_admin.initialize_app(cred, {
+            'databaseURL': "https://bioner-s-default-rtdb.asia-southeast1.firebasedatabase.app/"
+        })
 
 # Fetch real-time data from Firebase
 def fetch_data():
@@ -142,3 +146,6 @@ with col1:
     - Blower: {"On" if blower else "Off"}
     - Tekanan Uap: {tekanan_uap} Bar
     """)
+
+time.sleep(0.1)
+st.rerun()
