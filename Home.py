@@ -70,7 +70,7 @@ def login_user(email, password):
         else:
             st.error(f"Error: {response.json()['error']['message']}")
     except Exception as e:
-        st.error(f"klik login sekali lagi")
+        st.error(f"Error logging in: {e}")
 
 # Email validation function
 def is_valid_email(email):
