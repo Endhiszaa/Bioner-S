@@ -1,0 +1,8 @@
+streamlit
+firebase_admin
+pandas
+requests
+plotly
+streamlit_extras
+streamlit_shadcn_ui
+numpy
