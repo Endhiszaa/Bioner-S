@@ -14,7 +14,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-# Ensure user is logged in
+# memastikan user sudah login
 if 'logged_in' not in st.session_state or not st.session_state['logged_in']:
     st.error("Please log in to access this page.")
     st.switch_page('Home.py')
@@ -23,7 +23,7 @@ if st.sidebar.button("Logout"):
     st.session_state['logged_in'] = False
     st.switch_page('Home.py')
 
-# Initialize Firebase Admin SDK
+# menginisialisasi firebase
 @st.cache_resource
 def init_firebase():
     if not firebase_admin._apps:
@@ -32,7 +32,7 @@ def init_firebase():
             'databaseURL': "https://bioner-s-default-rtdb.asia-southeast1.firebasedatabase.app/"
         })
 
-# Fetch real-time data from Firebase
+# mengambil data real-time dari firebase
 def fetch_data():
     suhuApi = db.reference('/SuhuApi').get()
     suhuAir = db.reference('/SuhuAir').get()
@@ -43,12 +43,12 @@ def fetch_data():
     tekanan_uap = db.reference('/Tekanan_uap').get()
     return suhuApi, suhuAir, volt, ampere, watt, blower, tekanan_uap
 
-# Fetch the logged-in user's email
+# mengambil email user login
 def get_user_email():
     user = auth.get_user(st.session_state['user_id'])
     return user.email
 
-# Send email notification using smtplib
+# mengirim notifikasi email menggunakan smtplib
 def send_email(receiver_email, subject, body):
     sender_email = 'aqsha.rhizqa.endhisza@gmail.com'
     sender_password = 'tjvv mdqc onqa ikqe'
@@ -74,7 +74,7 @@ def send_email(receiver_email, subject, body):
     except Exception as e:
         st.error(f"Failed to send email: {e}")
 
-# Function to create a radial bar
+# membuat radial bar
 def create_radial_bar(value, title, max_value=500):
     percentage = (value / max_value) * 100
     if percentage > 100:
@@ -108,19 +108,19 @@ st.subheader("Smart Energy for the Future")
 # Fetch data from Firebase
 suhuApi, suhuAir, volt, ampere, watt, blower, tekanan_uap = fetch_data()
 
-# Check Tekanan Uap and send email if 9 or above
+# mengecek tekanan uap dan mengirimkan email jika tekanan sudah sampai atau lebih dari 9
 if tekanan_uap >= 9:
     receiver_email = get_user_email()
     send_email(receiver_email, "Tekanan Uap Mencukupi", "Tekanan uap mencapai atau melebihi 9 Bar.")
 
-# Create radial bars
+
 radial_bars = [
     ("Suhu Air", "°C", suhuAir),
     ("Tegangan Listrik", "V", volt),
     ("Suhu Api", "°C", suhuApi),
 ]
 
-# Top row with 3 radial bars
+# membuat 3 radial bar diataas
 col1, col2, col3 = st.columns(3)
 with col1:
     st.plotly_chart(create_radial_bar(radial_bars[0][2], radial_bars[0][0]), use_container_width=True)
@@ -137,7 +137,7 @@ with col3:
 # Horizontal rule
 st.markdown("---")
 
-# Bottom status section
+# membuat bagian status dibawah
 col1, col2 = st.columns([1, 0.9])
 
 with col1:
