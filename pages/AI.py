@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(
     page_title="Real Time Data",
-    page_icon=favicon,
+    page_icon="⚡",
     layout="wide",
     initial_sidebar_state="auto"
 )
