@@ -11,7 +11,6 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 
 
-favicon = Image.open("image.ico")  
 
 st.set_page_config(
     page_title="Real Time Data",
