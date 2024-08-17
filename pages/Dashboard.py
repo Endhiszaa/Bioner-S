@@ -99,13 +99,13 @@ def create_radial_bar(value, title, max_value=500):
     )
     return fig
 
-# Initialize Firebase
+
 init_firebase()
 
 st.title("Bioner-S")
 st.subheader("Smart Energy for the Future")
 
-# Fetch data from Firebase
+# mengambil data dari firebase
 suhuApi, suhuAir, volt, ampere, watt, blower, tekanan_uap = fetch_data()
 
 # mengecek tekanan uap dan mengirimkan email jika tekanan sudah sampai atau lebih dari 9
@@ -113,14 +113,13 @@ if tekanan_uap >= 9:
     receiver_email = get_user_email()
     send_email(receiver_email, "Tekanan Uap Mencukupi", "Tekanan uap mencapai atau melebihi 9 Bar.")
 
-
+# membuat 3 radial bar diatas
 radial_bars = [
     ("Suhu Air", "°C", suhuAir),
     ("Tegangan Listrik", "V", volt),
     ("Suhu Api", "°C", suhuApi),
 ]
 
-# membuat 3 radial bar diataas
 col1, col2, col3 = st.columns(3)
 with col1:
     st.plotly_chart(create_radial_bar(radial_bars[0][2], radial_bars[0][0]), use_container_width=True)
