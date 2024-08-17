@@ -68,7 +68,7 @@ if st.button('Predict'):
         # Memprediksi nilai menggunakan model
         y_input_predLG = model2.predict([X_input_array])
 
-        st.write("Hasil Predeksi Tegangan(V): ")
+        st.write("Hasil Prediksi Tegangan(V): ")
         st.write(y_input_predLG)
     else:
         st.error("Pastikan semua nilai input adalah angka yang valid.")
